@@ -5,6 +5,7 @@ const loadData = () => {
     searchField.value = '';
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
 
+    // fetch data based on searched word 
     fetch(url)
         .then(res => res.json())
         .then(data => displayBooks(data.docs, data.num_found))
@@ -16,15 +17,16 @@ const displayBooks = (docs, num) => {
     const h5 = document.getElementById('result-number');
     displayResults.textContent = '';
     h5.innerText = '';
+    // to show number of found results 
     if (num !== 0) {
         h5.innerText = `Total ${num} results found`;
     }
     else {
         h5.innerText = `No results found`;
     }
+    // to show first twenty resuts in the display part 
     docs = docs.slice(0, 20);
     docs.forEach(doc => {
-        console.log(doc);
         const div = document.createElement('div');
         div.classList.add('col');
         div.innerHTML = `
